@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Post Edit {% endblock %}
+
+{% block body %}
+
+<div class="timeline-container">
+
+    <div id="posting">
+            {{ form_start(editForm) }}
+                {{ form_row(editForm.category) }}
+                {{ form_row(editForm.title) }}
+                {{ form_row(editForm.text) }}
+            {{ form_end(editForm) }}
+    </div>
+
+        <div class="container">
+            {% if editError %}
+                <p>Error!</p>
+            {% endif %}
+        </div>
+
+</div>
+    
+{% endblock %}

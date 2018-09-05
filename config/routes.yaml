@@ -1,0 +1,107 @@
+#index:
+#    path: /
+#    controller: App\Controller\DefaultController::index
+
+homepage:
+  path:     /
+  controller: App\Controller\RegistrationController::registerUser
+
+Chat:
+  path:   /Chat
+  controller: App\Controller\ChatController::showChat
+
+
+
+post:
+  path: /post
+  controller: App\Controller\PostController::postList
+
+
+login:
+  path:     /registration
+  controller: App\Controller\RegistrationController::login
+
+# When you login you will be redirected to the HomePage!...The logout Button is already on the home page, is just place it in place.
+
+
+logout:
+  path:     /logout
+  controller: App\Controller\RegistrationController::registerUser
+
+profile:
+  path:     /profile
+  controller: App\Controller\DefaultController::profile
+
+download_document:
+  path: /document/{document}
+  controller: App\Controller\DefaultController::downloadDocument
+
+post_detail:
+  path:     /post/detail/{post}
+  controller: App\Controller\PostController::commentDetail
+
+
+post_edit:
+  path:       /post/edit/{post}
+  controller: App\Controller\PostController::editPost
+
+comment_edit:
+  path:       /comment/edit/{post}/{comment}
+  controller: App\Controller\PostController::editComment
+
+delete_post:
+  path:       /post/delete/{post}
+  controller: App\Controller\PostController::deletePost
+
+delete_comment:
+  path:       /comment/delete/{post}/{comment}
+  controller: App\Controller\PostController::deleteComment
+
+profile_edit:
+    path:       /profile/edit
+    controller: App\Controller\DefaultController::profileEdit
+
+about:
+  path:     /about
+  controller: App\Controller\DefaultController::aboutUs
+
+terms:
+  path:     /terms
+  controller: App\Controller\DefaultController::terms
+
+privacy:
+  path:     /privacy
+  controller: App\Controller\DefaultController::privacy
+
+contact:
+  path:     /contact
+  controller: App\Controller\DefaultController::contact
+
+joao:
+  path:     /joao
+  controller: App\Controller\DefaultController::joao
+
+bahaa:
+  path:     /bahaa
+  controller: App\Controller\DefaultController::bahaa
+
+miro:
+  path:     /miro
+  controller: App\Controller\DefaultController::miro
+
+tamara:
+  path:     /tamara
+  controller: App\Controller\DefaultController::tamara
+
+ibrahem:
+  path:     /ibrahem
+  controller: App\Controller\DefaultController::ibrahem
+
+
+delete_profile:
+  path:       /user/delete/{user}
+  controller: App\Controller\DefaultController::deleteUser
+
+profile_user:
+  path: /profile/{id}
+  controller: App\Controller\DefaultController::profileUser

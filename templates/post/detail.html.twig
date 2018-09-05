@@ -1,0 +1,94 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} post Comments{% endblock %}
+
+{% block body %}
+	    <div id="left-navbar">
+        {% if is_granted('ROLE_USER') %}  
+            {% if app.user.getPicture() is not empty %}
+                <div class='index-pic-div'><img class="index-profile-pic"  src="{{ path('download_document', {'document' : app.user.getPicture().getId()}) }}"> </div> <br>
+            {% else %}
+                <div></div><br>
+            {% endif %}
+            <a href="{{ path ('profile') }}"><i class="fas fa-user-alt"></i>  My profile | </a>
+            <br>
+            <a href="{{ path ('Chat') }}"><i class="fas fa-envelope"></i>   Messages | </a>
+            <br>                        
+            <a href = "{{path ('post') }}"><i class="fas fa-list-alt"></i>  Posts | <a/>
+            <br>
+            {% if is_granted('ROLE_ADMIN') %}
+                <a href = "{{path ('admin') }}"><i class="fas fa-columns"></i>  Admin panel | <a/>
+            {% endif %}
+            
+        {% endif %}
+    </div>    
+
+    
+    <div class="timeline-container">
+        <div class="post-container">
+            {% if post.getPicture() is not empty %}
+                <div class="post-pic-container"><img class= 'post-pic' src="{{ path ('download_document', {'document' : post.getPicture().getId()}) }}"></div>
+            {% else %}
+                <div class="post-pic-container"><img class="post-pic"  src="{{ asset('img/postAva.png')}}"></div>
+            {% endif %}
+            <p class="creation-date-show">Created at:&nbsp {{ post.getCreationDate()| date('Y-m-d H:i:s') }}| Category:&nbsp{{ post.getCategory() }}</p>
+            <h3 class="title-show">{{ post.getTitle() }}</h3>
+            <p class="body-show">{{ post.getText() }}<p>
+            {% if app.user == post.getUser() %}
+                <p class="post-edit-show"><a class="click-link" href="{{ path("post_edit", {post: post.getId()}) }}">Edit Post</a></p>
+                <p class="post-delete-show"><a class="click-link" href="{{ path("delete_post", {post: post.getId()}) }}">Delete Post</a></p>
+            {% endif %}
+
+        </div>
+        <div class='comments-container'>
+            <p>Comments</p>
+            {% if comments is empty %}
+                <div class='single-comment-container'>No Comments yet on this post</div>
+            {% else %}             
+            {% for comment in comments %}
+                <div class='single-comment-container'>
+                    
+                    <p class='comment-show-date'>Commented at:
+                        {{ comment.getCreateDate()| date('Y-m-d H:i:s') }}
+                    </p>
+                    <div class="comment-user-display" >
+                        {% if comment.getUser.getPicture() is not empty %}
+                        <div class='user-pic-comment'><img class="comment-user-pic"  src="{{ path('download_document', {'document' : comment.getUser.getPicture().getId()}) }}"> </div>
+                        {% else %}
+                        <div class='user-pic-comment' > <img class="comment-user-pic"  src="{{ asset('img/avatar.png')}}"> </div>
+                        {% endif %}
+                        <div class="comment-user-display-username">
+                            <a  href="{{ path ('profile_user', { 'id' : comment.getUser.getId() }) }}"> {{ comment.getUser.getUsername() }} </a> 
+                        </div>
+                    </div>
+                    {% if comment.getPicture() is not empty %}
+                        <div class='comment-pic-container'>
+                            <img class='comment-pic' src="{{ path('download_document', {'document' : comment.getPicture().getId()}) }}"></td>
+                        </div>
+                        {% else %}
+                        <div class='comment-pic-container'>
+                        </div>
+                    {% endif %}
+                    <p class='comment-show-body'>
+                        {{ comment.getContent() }} 
+                    </p>
+                    {% if app.user == comment.getUser() %}
+                    <p class="comment-edit-show"><a class="click-link-comment" href="{{ path("comment_edit", {comment: comment.getId(), post:post.getId()}) }}">Edit Comment</a></p>
+                    <p class="comment-edit-show"><a class="click-link-comment" href="{{ path("delete_comment", {comment: comment.getId(), post:post.getId()}) }}">Delete Comment</a></p> 
+                    {% endif %}
+                </div>
+            {% endfor %}
+
+            {% endif %}
+        </div>
+	    <div id="new-comment">
+            <p>Add a new comment</p>
+            {{ form(commentForm) }}
+        </div>
+
+    
+    </div>
+{% endblock %}
+
+
+

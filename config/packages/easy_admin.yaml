@@ -1,0 +1,20 @@
+easy_admin:
+   site_name: '<img src="https://i.imgur.com/BDsnQyf.png" />'
+   entities:
+       - App\Entity\User
+       - App\Entity\Post
+       - App\Entity\Comment
+   list:
+       title: ""
+       actions:
+           - { name: 'show', icon: 'search', label: '' }
+           - { name: 'edit', icon: 'pencil', label: '' }
+           - { name: 'delete', icon: 'times', label: '' }
+   design:
+       brand_color: '#000'
+       menu:
+            - { label: 'Return to Homepage', route: 'post', icon: 'arrow-circle-left' }
+            - { label: '___  Admin DasHboard ___' }
+            - { entity: 'User', icon: 'users' }
+            - { entity: 'Post', icon: 'terminal' }
+            - { entity: 'Comment', icon: 'comment' }

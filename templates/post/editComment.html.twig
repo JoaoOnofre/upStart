@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Edit Comment {% endblock %}
+
+{% block body %}
+
+    <div class="timeline-container">
+        {{form(edit_form)}}
+    </div>
+
+    <div>
+        {% if editError %}
+			<p>Error!</p>
+        {% endif %}
+    </div>
+    
+{% endblock %}

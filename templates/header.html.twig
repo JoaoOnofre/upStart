@@ -1,0 +1,22 @@
+<header id="try">  
+    <a href = "{{path ('post') }}"> <h1 id="logo-us">uS</h1><a/>
+    <div id="search-input-container">
+        <i class="fas fa-search"></i> <input type="search" id="search-input" placeholder="Search">
+    </div>
+    
+    
+        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                <a id="toggler" href="#">
+                    <span class="menu-item"></span>
+                    <span class="menu-item"></span>
+                    <span class="menu-item"></span>
+                </a>
+                <a class='logout-header' href = "{{path ('post') }}"> Home <a/>
+                <a class="logout-header" href = "{{path ('logout') }}"><i class="fas fa-sign-out-alt"></i>  Log Out | <a/>
+        {% endif %}
+
+</header>
+
+
+
+   

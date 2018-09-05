@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+{% block title %}Profile{% endblock %}
+{% block body %}
+				<div id="left-navbar">
+					{% if is_granted('ROLE_USER') %}
+					<a href="{{ path ('profile') }}"><i class="fas fa-user-alt"></i>  My profile | </a>
+					<br>
+					<br>
+					<a href="{{ path ('Chat') }}"><i class="fas fa-envelope"></i>   Messages | </a>
+					<br>
+					<br>                        
+					<a href = "{{path ('post') }}"><i class="fas fa-list-alt"></i>  Posts | <a/>
+					<br>
+					<br>
+					{% if is_granted('ROLE_ADMIN') %}
+						<a href = "{{path ('admin') }}"><i class="fas fa-columns"></i>  Admin panel | <a/>
+					{% endif %}
+				{% endif %}
+				</div>   
+				
+				<div class="timeline-container">
+					{% block profile %}
+					<div class="profile">
+						{% if user.getPicture() is not empty %}    
+							<div class="profile-user-pic">
+								<img class="profile-pic" src="{{ path('download_document', {'document' : user.getPicture().getId()}) }}"> 
+							</div>
+						{% else %}
+							<div class="profile-user-pic"><img class="profile-pic" src="{{ asset('img/avatar.png')}}"> </div>
+						{% endif %}
+						<br>
+						<div class="profile-details">
+						<p><i class="fas fa-clock"></i> Joined on: {{ user.getCreateDate()| date('Y-m-d H:i:s') }}</p>
+						<p><i class="fas fa-user-alt"></i> Username: {{ user.getUsername() }}</p>
+						<p><i class="fas fa-envelope"></i> E-Mail: {{ user.getEmail() }}</p>   
+						<p><i class="fas fa-info-circle"></i> About: {{ user.getAbout() }}</p> 
+						<p><i class="fas fa-map-marker-alt"></i> Address: {{ user.getAddress() }}</p> 
+
+						{% if app.user == user %}
+						<a href="{{ path("profile_edit") }}" class="btn btn-primary btn-lg" role="button">Edit profile</a>
+						<a href="{{ path("delete_profile", {user: user.getId()}) }}" class="btn btn-danger btn-lg">Delete User</a> 
+						
+						{% endif %}
+						</div>
+					</div> 
+					{% endblock %} 
+				</div>          
+{% endblock %}
+
+{#khaleesi - 1
+kakashi - 2
+sakura - 3
+sasuke - 4
+naruto - 5
+#}
+
+
+	

@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <div class="timeline-container"> 
+        <a href="{{ path ('post') }}" class="back-about" >Back</a>
+    
+        <div id="about-us">
+            <h3><u><strong>About us</strong></u></h3><br>
+            <h4> Hello world! </h4>
+            <h4> We are a group of developers from Luxembourg. 
+            Five of us met in the WebForce3 Fit4Coding course. We worked as a team on final project in which we made this website.<br>
+            The idea of this social network website is to help all people who are starting their own business or something similar.
+            Also, if you are someone experienced who already has his own business established, you can sign-up here and help or just share advice with people who need it.
+            </h4>
+        </div>
+        
+        <div id= "photos">
+            <div class="nonono">
+                <a href="{{ path ('joao') }}"> <img class="team-profile" src="../img/joao.jpg" alt="photo of joão"><br>
+                João Nuno Onofre </a>
+            </div>
+        
+            <div class="nonono">
+                <a href="{{ path ('bahaa') }}"> <img class="team-profile" src="../img/bahaa.jpg" alt="photo of bahaa"><br>
+                Bahaa Al Mahamid </a>
+            </div><br>
+
+            <div class="nonono" >
+                <a href="{{ path ('tamara') }}"> <img class="team-profile" src="../img/tamara.jpg" alt="photo of tamara"><br> 
+                    Tamara Pupac </a>
+            </div>
+            
+            <div class="nonono">
+                <a href="{{ path ('ibrahem') }}"> <img class="team-profile" src="../img/ibrahim.jpg" alt="photo of ibrahem"><br>
+                Ibrahem Ayyed </a>
+            </div><br>
+
+            <div class="nonono">
+                <a href="{{ path ('miro') }}"> <img class="team-profile" src="../img/miro.jpg" alt="photo of miro"><br>
+                Miroslav Nedeljkovič </a>
+            </div><br>
+        </div>
+    </div>
+    
+{% endblock %}
+

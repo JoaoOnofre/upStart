@@ -1,0 +1,74 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}upSTART.lu{% endblock %}
+
+{% block body %}
+	<body onload="load()">
+		{% block left_marge %}
+                    <div id="left-navbar">
+                        {% if is_granted('ROLE_USER') %}
+                        <a href="{{ path ('profile') }}"><i class="fas fa-user-alt"></i>  My profile | </a>
+                        <br>
+                        <br>
+                        <a href="{{ path ('Chat') }}"><i class="fas fa-envelope"></i>   Messages | </a>
+                        <br>
+                        <br>                        
+                        <a href = "{{path ('post') }}"><i class="fas fa-list-alt"></i>  Posts | <a/>
+                        <br>
+                        <br>
+                        {% if is_granted('ROLE_ADMIN') %}
+                            <a href = "{{path ('admin') }}"><i class="fas fa-columns"></i>  Admin panel | <a/>
+                        {% endif %}
+                        
+                    {% endif %}
+                    </div>               
+		{% endblock %}
+		<div class='timeline-container'>
+		<h2 class = "title">Global Chat</h2>
+				{% if messages is empty %}
+					<p>No messages found in the application</p>
+				{% else %}
+				<div id='message-container' class='message-container'>
+					{% for message in messages %}
+						<div class='single-comment-container'>
+						<p class='comment-show-date'>sent at:
+                        {{ message.getCreateDate()| date('Y-m-d H:i:s') }}
+                    </p>
+                    <div class="comment-user-display" >
+                        {% if message.getUser.getPicture() is not empty %}
+                        <div class='user-pic-comment'><img class="comment-user-pic"  src="{{ path('download_document', {'document' : message.getUser.getPicture().getId()}) }}"> </div>
+                        {% else %}
+                        <div class='user-pic-comment' > <img class="comment-user-pic"  src="{{ asset('img/avatar.png')}}"> </div>
+                        {% endif %}
+                        <div class="comment-user-display-username">
+                            <a  href="{{ path ('profile_user', { 'id' : message.getUser.getId() }) }}"> {{ message.getUser.getUsername() }} </a> 
+                        </div>
+                    </div>
+                    <p class='comment-show-body'>
+                        {{ message.getContent() }} 
+                    </p>
+
+						</div>    
+					{% endfor %}
+				</div>
+		{% endif %}
+		<div class='messenger-form'>
+			{{ form_start(chatForm) }}
+			{{ form_row(chatForm.content) }}
+			<button type="submit" class="login-form-submit" > Send </button>
+			{{ form_end(chatForm) }}
+		</div>
+		</div>
+		
+	
+{% block javascripts %}
+<script type="text/javascript">
+function load()
+{
+setTimeout("window.open(self.location, '_self');", 10000);
+}
+</script>
+
+{% endblock %}
+</body>
+{% endblock %}
